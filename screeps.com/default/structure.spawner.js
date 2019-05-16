@@ -13,9 +13,9 @@ BODY_TYPE['big_ant'] = [WORK,WORK,CARRY,CARRY,MOVE,MOVE]; // cost: 400
 BODY_TYPE['very_big_ant'] = [WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE]; // cost: 600
 BODY_TYPE['giant_ant'] = [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; // cost: 800
 BODY_TYPE['mega_ant'] = [
-    WORK,WORK,WORK,WORK,WORK, 
-    CARRY,CARRY,CARRY,CARRY,CARRY, 
-    CARRY,CARRY,CARRY,CARRY,CARRY, 
+    WORK,WORK,WORK,WORK,WORK,
+    CARRY,CARRY,CARRY,CARRY,CARRY,
+    CARRY,CARRY,CARRY,CARRY,CARRY,
     MOVE,MOVE,MOVE,MOVE,MOVE,
     MOVE,MOVE,MOVE,MOVE,MOVE
 ]; // cost: 1250
@@ -28,8 +28,8 @@ var spawner = {
             var spawningCreep = Game.creeps[this.spawn.spawning.name];
             this.spawn.room.visual.text(
                 'ð ï¸' + spawningCreep.memory.role,
-                this.spawn.pos.x + 1, 
-                this.spawn.pos.y, 
+                this.spawn.pos.x + 1,
+                this.spawn.pos.y,
                 {align: 'left', opacity: 0.8}
             );
         } else {
@@ -37,10 +37,10 @@ var spawner = {
         }
 
         this.spawn.room.visual.text(
-            `Hive Vega`,
+            `Hive Vega 1`,
             1, 4, { align: 'left', color: '#FFFFFF' }
         );
-        
+
         this.spawn.room.visual.text(
             `Energy available: ${this.spawn.room.energyAvailable} (${(100 * this.spawn.room.energyAvailable / this.spawn.room.energyCapacityAvailable).toFixed(0) }%)`,
             1, 1, { align: 'left', color: '#00FF00' }
@@ -49,14 +49,14 @@ var spawner = {
             `Energy capacity: ${this.spawn.room.energyCapacityAvailable}`,
             1, 2, { align: 'left', color: '#DDDDDD' }
         );
-        
+
         this.spawn.room.visual.text(
             `Energy in sources: ${this.spawn.room.find(FIND_SOURCES).reduce((acc,cur) => acc + cur.energy, 0)}`,
             1, 3, { align: 'left', color: '#FFFF00' }
         );
-        
+
     },
-    
+
     maintainTargetPopulation: function() {
         //console.log('MTP');
         for (var role in TARGET_NUMBER_OF_CREEPS) {
@@ -69,27 +69,27 @@ var spawner = {
             }
         }
     },
-    
+
     spawnWithRole: function(role) {
         console.log('SWR');
         if (!this.spawn.spawning) {
-            
+
             if (Memory.creepSerialNumber === undefined) {
                 Memory.creepSerialNumber = 0;
             }
-            
+
             let newName = `${role}_${Memory.creepSerialNumber}`;
             let chosenBodyType = BODY_TYPE['ant'];
             console.log('Spawning new Ant: ' + newName);
-            
+
             if (this.spawn.room.energyAvailable > 1500) {
                 chosenBodyType = BODY_TYPE['mega_ant'];
                 newName = 'mega_' + newName;
-            } else 
+            } else
             if (this.spawn.room.energyAvailable > 800) {
                 chosenBodyType = BODY_TYPE['giant_ant'];
                 newName = 'giant_' + newName;
-            } else 
+            } else
             if (this.spawn.room.energyAvailable == 300) {
                 chosenBodyType = BODY_TYPE['ant'];
             } else {
@@ -98,8 +98,8 @@ var spawner = {
             }
 
             let result = this.spawn.spawnCreep(
-                chosenBodyType, 
-                newName, 
+                chosenBodyType,
+                newName,
                 {memory: {role: role}}
             );
             if (result == OK) {
@@ -113,11 +113,11 @@ var spawner = {
                         break;
                     default:
                         console.log(`Failed with error code: ${result}`);
-                    
+
                 }
             }
         }
     }
-}; 
+};
 
 module.exports = spawner;

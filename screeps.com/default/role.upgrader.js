@@ -11,7 +11,7 @@ var roleUpgrader = {
             roleHarvester.harvest(creep);
         }
 	},
-	
+
 	determineMission: function(creep) {
 	    if (!creep.memory.mission) {
 	        creep.memory.mission = "harvest";
@@ -25,9 +25,9 @@ var roleUpgrader = {
 	    if (creep.memory.mission != "upgrade" && creep.carry.energy == creep.carryCapacity) {
 	        creep.memory.mission = "upgrade";
 	        creep.say('â¡ upgrade');
-	    }	    
+	    }
 	},
-	
+
 	upgrade: function(creep) {
         if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
             creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
