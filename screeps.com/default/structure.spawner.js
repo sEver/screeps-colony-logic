@@ -27,7 +27,7 @@ var spawner = {
         if (this.spawn.spawning) {
             var spawningCreep = Game.creeps[this.spawn.spawning.name];
             this.spawn.room.visual.text(
-                'ð ï¸' + spawningCreep.memory.role,
+                'spawning ' + spawningCreep.memory.role,
                 this.spawn.pos.x + 1,
                 this.spawn.pos.y,
                 {align: 'left', opacity: 0.8}
@@ -37,7 +37,7 @@ var spawner = {
         }
 
         this.spawn.room.visual.text(
-            `Hive Vega 2`,
+            `Hive Vega 4`,
             1, 4, { align: 'left', color: '#FFFFFF' }
         );
 

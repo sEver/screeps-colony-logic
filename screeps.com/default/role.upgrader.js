@@ -19,12 +19,12 @@ var roleUpgrader = {
         // if upgrading and empty - switch to harvesting
         if (creep.memory.mission != "harvest" && creep.carry.energy == 0) {
             creep.memory.mission = "harvest";
-            creep.say('ð harvest');
+            creep.say('harvest');
 	    }
 	    // if not upgrading and full - switch to upgrading
 	    if (creep.memory.mission != "upgrade" && creep.carry.energy == creep.carryCapacity) {
 	        creep.memory.mission = "upgrade";
-	        creep.say('â¡ upgrade');
+	        creep.say('upgrade');
 	    }
 	},
 

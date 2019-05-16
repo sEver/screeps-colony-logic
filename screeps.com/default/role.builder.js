@@ -21,11 +21,11 @@ var roleBuilder = {
 	    }
 	    if (creep.memory.mission != "harvest" && creep.carry.energy == 0) {
             creep.memory.mission = "harvest"
-            creep.say('ð harvest');
+            creep.say('harvest');
 	    }
 	    if (creep.memory.mission != "build" && creep.carry.energy == creep.carryCapacity) {
 	        creep.memory.mission = "build"
-	        creep.say('ð§ build');
+	        creep.say('build');
 	    }
 	},	
 	

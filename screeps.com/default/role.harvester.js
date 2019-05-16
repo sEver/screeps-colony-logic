@@ -17,11 +17,11 @@ var roleHarvester = {
 	    }
 	    if (creep.memory.mission != 'harvest' && creep.carry.energy == 0) {
             creep.memory.mission = 'harvest';
-            creep.say('ð harvest');
+            creep.say('harvest');
 	    } 
 	    if (creep.memory.mission != 'deliver' && creep.carry.energy == creep.carryCapacity) {
 	        creep.memory.mission = 'deliver';
-            creep.say('â¡ deliver');
+            creep.say('deliver');
 	    } 
 	},
 	
