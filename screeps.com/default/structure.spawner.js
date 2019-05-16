@@ -35,6 +35,11 @@ var spawner = {
         } else {
             this.maintainTargetPopulation();
         }
+
+        this.spawn.room.visual.text(
+            `Hive Vega`,
+            1, 4, { align: 'left', color: '#FFFFFF' }
+        );
         
         this.spawn.room.visual.text(
             `Energy available: ${this.spawn.room.energyAvailable} (${(100 * this.spawn.room.energyAvailable / this.spawn.room.energyCapacityAvailable).toFixed(0) }%)`,
