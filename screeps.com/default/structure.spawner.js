@@ -37,7 +37,7 @@ var spawner = {
         }
 
         this.spawn.room.visual.text(
-            `Hive Vega 1`,
+            `Hive Vega 2`,
             1, 4, { align: 'left', color: '#FFFFFF' }
         );
 
