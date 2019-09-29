@@ -1,21 +1,22 @@
 var aishaConfig = require('aisha.config');
 
 module.exports = {
-  run: function() {
-    var roomName = Game.spawns['Spawn1'].room.name;
-    this.towers = Game.rooms[roomName].find(
+  run: function(room) {
+    this.towers = room.find(
       FIND_MY_STRUCTURES,
       {filter: { structureType: STRUCTURE_TOWER }}
     );
     if(this.towers.length) {
-      this.defendRoom(roomName);
-      this.maintainRoom(roomName);
-      this.drawRangeCircles(roomName);
+      this.defendRoom(room);
+      this.maintainRoom(room);
+      this.drawRangeCircles(room);
+    } else {
+      console.log(`No towers in room: ${room.name}`)
     }
   },
 
-  maintainRoom: function(roomName) {
-    var damagedBuildings = Game.rooms[roomName].find(FIND_STRUCTURES, {
+  maintainRoom: function(room) {
+    var damagedBuildings = room.find(FIND_STRUCTURES, {
       filter: structure => {
         var result =
         (
@@ -35,8 +36,8 @@ module.exports = {
     }
   },
 
-  defendRoom: function(roomName) {
-    var hostiles = Game.rooms[roomName].find(FIND_HOSTILE_CREEPS);
+  defendRoom: function(room) {
+    var hostiles = room.find(FIND_HOSTILE_CREEPS);
     if (hostiles.length) {
       var username = hostiles[0].owner.username;
 
@@ -48,9 +49,9 @@ module.exports = {
     }
   },
 
-  drawRangeCircles: function(roomName) {
+  drawRangeCircles: function(room) {
     this.towers.forEach(tower => {
-      Game.rooms[roomName].visual.circle(
+      room.visual.circle(
         tower.pos,
         {
           radius: 5,
@@ -58,7 +59,7 @@ module.exports = {
           opacity: 0.02
         }
       );
-      Game.rooms[roomName].visual.circle(
+      room.visual.circle(
         tower.pos,
         {
           radius: 20,

@@ -1,9 +1,5 @@
 var structureSpawn = require('structure.spawn');
-
-var creepDirectorLogic = require('logic.director.creeps');
-var towerDirectorLogic = require('logic.director.towers');
-
-var utilities = require('utilities.creeps');
+var structureTower = require('structure.tower');
 
 module.exports.loop = function () {
   // I am AI-SHA. Witness my emergence.
@@ -22,12 +18,7 @@ module.exports.loop = function () {
 
   Object.values(Game.rooms).forEach((room)=>{
     console.log(`Running room: ${room.name}`);
-    //towerDirectorLogic.run(room);
-    //creepDirectorLogic.run(room);
+    structureTower.run(room);
   });
 
-  if (Game.time % 100 == 0) {
-    //utilities.clearMemoryOfDeadCreeps();
-    //utilities.pruneListOfEmptyTombStones();
-  }
 }
