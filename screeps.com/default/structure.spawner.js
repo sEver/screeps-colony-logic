@@ -62,7 +62,7 @@ var spawner = {
       anchor.x, anchor.y+2, { align: 'left', color: '#FFFF00' }
     );
     this.spawn.room.visual.text(
-      `Hive Vega Experimental 1`,
+      `Hive Vega STABLE 1`,
       anchor.x, anchor.y+3, { align: 'left', color: '#FFFFFF' }
     );
 
