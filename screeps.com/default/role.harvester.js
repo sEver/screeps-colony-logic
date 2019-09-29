@@ -12,31 +12,27 @@ var roleHarvester = {
   },
 
   determineMission: function(creep) {
-    if (!creep.memory.mission) {
+    if (!creep.memory.mission || creep.memory.mission != 'harvest' && creep.carry.energy == 0) {
       creep.memory.mission = 'harvest';
     }
-    if (creep.memory.mission != 'harvest' && creep.carry.energy == 0) {
-      creep.memory.mission = 'harvest';
-      creep.say('harvest');
-    }
-    if (creep.memory.mission != 'deliver' && creep.carry.energy == creep.carryCapacity) {
+    if (creep.memory.mission != 'deliver' && creep.carry.energy == creep.carryCapacity || _.sum(creep.carry) < 2) {
       creep.memory.mission = 'deliver';
-      creep.say('deliver');
     }
+    creep.say(creep.memory.mission);
   },
 
   harvest: function(creep) {
     // if(this.scavenge(creep) == 0) {
     //   return 0;
     // }
-    // return this.harvestSmarter(creep);
+    return this.harvestSmarter(creep);
 
-    var closestSource = creep.pos.findClosestByPath(FIND_SOURCES);
-    var status = creep.harvest(closestSource);
-    if (status == ERR_NOT_IN_RANGE) {
-      creep.moveTo(closestSource, {visualizePathStyle: {stroke: '#ffaa00'}});
-    }
-    return 0;
+    // var closestSource = creep.pos.findClosestByPath(FIND_SOURCES);
+    // var status = creep.harvest(closestSource);
+    // if (status == ERR_NOT_IN_RANGE) {
+    //   creep.moveTo(closestSource, {visualizePathStyle: {stroke: '#ffaa00'}});
+    // }
+    // return 0;
   },
 
   scavenge: function(creep) {
