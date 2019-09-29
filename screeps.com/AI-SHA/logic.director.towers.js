@@ -1,3 +1,5 @@
+var aishaConfig = require('aisha.config');
+
 module.exports = {
   run: function() {
     var roomName = Game.spawns['Spawn1'].room.name;
@@ -14,16 +16,16 @@ module.exports = {
 
   maintainRoom: function(roomName) {
     var damagedBuildings = Game.rooms[roomName].find(FIND_STRUCTURES, {
-      filter: object => {
+      filter: structure => {
         var result =
         (
-          object.structureType == STRUCTURE_ROAD ||
-          object.structureType == STRUCTURE_RAMPART ||
-          object.structureType == STRUCTURE_CONTAINER ||
-          object.structureType == STRUCTURE_WALL
+          structure.structureType == STRUCTURE_ROAD ||
+          structure.structureType == STRUCTURE_RAMPART ||
+          structure.structureType == STRUCTURE_CONTAINER ||
+          structure.structureType == STRUCTURE_WALL
         ) &&
-        object.hits < object.hitsMax * 0.8 &&
-        object.hits < 10000
+        structure.hits < structure.hitsMax * 0.8 &&
+        structure.hits < aishaConfig.minimumStructureHp
         return result;
       }
     });

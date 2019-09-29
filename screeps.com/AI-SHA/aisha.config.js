@@ -9,5 +9,6 @@ module.exports = {
     drone: 2,
     upgrader: 1,
     builder: 1
-  }
+  },
+  minimumStructureHp: 2000
 }
