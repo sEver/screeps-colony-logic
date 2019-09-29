@@ -5,8 +5,7 @@ var roleDrone = require('role.drone');
 
 var creepDirector = {
   run: function() {
-    for (var name in Game.creeps) {
-      var creep = Game.creeps[name];
+    Object.values(Game.creeps).forEach((creep) => {
       switch(creep.memory.role) {
         case 'harvester':
           roleHarvester.run(creep);
@@ -21,7 +20,7 @@ var creepDirector = {
           roleBuilder.run(creep);
           break;
       }
-    }
+    });
   }
 }
 
