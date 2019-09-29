@@ -1,13 +1,13 @@
 var utilitiesCreeps = require('utilities.creeps');
 
-var TARGET_NUMBER_OF_CREEPS = [];
+const TARGET_NUMBER_OF_CREEPS = [];
 TARGET_NUMBER_OF_CREEPS['harvester'] = 0;
 TARGET_NUMBER_OF_CREEPS['drone'] = 6;
 TARGET_NUMBER_OF_CREEPS['builder'] = 2;
 TARGET_NUMBER_OF_CREEPS['upgrader'] = 1;
 TARGET_NUMBER_OF_CREEPS['excavator'] = 0;
 
-var BODY_TYPE = [];
+const BODY_TYPE = [];
 BODY_TYPE['antX1'] = [WORK,CARRY,MOVE]; // cost: 200
 BODY_TYPE['antX2'] = [
   WORK,WORK,
@@ -34,8 +34,8 @@ BODY_TYPE['antX5'] = [
 BODY_TYPE['worker'] = [WORK,WORK,WORK,WORK,WORK,MOVE];// cost: 550
 
 var spawner = {
-  run: function() {
-      this.spawn = Game.spawns['Spawn1'];
+  run: function(spawn) {
+      this.spawn = spawn;
 
       if (this.spawn.spawning) {
         this.displaySpawnerStatus();
@@ -62,7 +62,7 @@ var spawner = {
       anchor.x, anchor.y+2, { align: 'left', color: '#FFFF00' }
     );
     this.spawn.room.visual.text(
-      `Hive Vega 11`,
+      `Hive Vega Experimental 1`,
       anchor.x, anchor.y+3, { align: 'left', color: '#FFFFFF' }
     );
 
@@ -94,31 +94,26 @@ var spawner = {
   spawnWithRole: function(role) {
     console.log('SWR');
 
-    if (this.spawn.spawning) return;
+    if (this.spawn.spawning) return ERR_BUSY;
 
     if (Memory.creepSerialNumber === undefined) {
       Memory.creepSerialNumber = 0;
     }
 
+
     let newName = `${role}_${Memory.creepSerialNumber}`;
     let chosenBodyType = BODY_TYPE['antX1'];
-    console.log('Spawning new Ant: ' + newName);
 
-    if (this.spawn.room.energyAvailable > 1500) {
-      chosenBodyType = BODY_TYPE['antX4'];
-      newName = 'mega_' + newName;
-    } else
     if (this.spawn.room.energyAvailable > 800) {
       chosenBodyType = BODY_TYPE['antX4'];
-      newName = 'giant_' + newName;
-    } else
-    if (this.spawn.room.energyAvailable == 300) {
-      chosenBodyType = BODY_TYPE['antX1'];
-    } else {
-      chosenBodyType = BODY_TYPE['antX2'];
-      newName = 'very_big_' + newName;
+      newName = 'quad_' + newName;
+    } else if (this.spawn.room.energyAvailable > 600) {
+      chosenBodyType = BODY_TYPE['antX3'];
+      newName = 'tri_' + newName;
     }
 
+
+    console.log('Trying to spawn new Ant: ' + newName);
     let result = this.spawn.spawnCreep(
       chosenBodyType,
       newName,
