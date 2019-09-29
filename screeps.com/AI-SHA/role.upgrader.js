@@ -29,7 +29,12 @@ var roleUpgrader = {
 
   upgrade: function(creep) {
     if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-      creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+      creep.moveTo(creep.room.controller, {visualizePathStyle: {
+        stroke: '#ffffff',
+        lineStyle: 'solid',
+        strokeWidth: 0.05,
+        opacity: 0.5
+      }});
     } else if (creep.upgradeController(creep.room.controller) == OK) {
       return 0;
     } else {

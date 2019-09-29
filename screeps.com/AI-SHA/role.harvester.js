@@ -97,14 +97,17 @@ var roleHarvester = {
   harvestSmarter: function(creep) {
     var sources = creep.room.find(FIND_SOURCES);
     var closestSource = creep.pos.findClosestByPath(sources, {filter: source => source.energy > 0});
-    //closestSource = sources[0];
-    //*
     if(!closestSource) {
       return -1;
-    }/* */
+    }
     var status = creep.harvest(closestSource);
     if (status == ERR_NOT_IN_RANGE) {
-      creep.moveTo(closestSource, {visualizePathStyle: {stroke: '#ffaa00'}});
+      creep.moveTo(closestSource, {visualizePathStyle: {
+        stroke: '#f4e068',
+        lineStyle: 'solid',
+        strokeWidth: 0.05,
+        opacity: 0.5
+      }});
     }
     return 0;
   },
@@ -115,24 +118,25 @@ var roleHarvester = {
       var sourcesMinified = sources.map(source => {return {energy: source.energy, pos: source.pos, id: source.id}});
       Memory.sources = sourcesMinified;
       Memory.sourcesLastUpdated = Game.time;
-      //console.log(JSON.stringify(Memory.sources));
     } else {
       if(Game.time > Memory.sourcesLastUpdated + 5) {
         Memory.sources = Memory.sources.map(source => {return Object.assign(source, {energy: Game.getObjectById(source.id).energy})});
         Memory.sourcesLastUpdated = Game.time;
-        //console.log(JSON.stringify(Memory.sources));
       }
     }
     var nonEmptySources = Memory.sources.filter(source => source.energy != 0);
     if (nonEmptySources.length) {
-      //console.log('NoNEmpty:');
-      //console.log(JSON.stringify(nonEmptySources));
       var chosenSourceId = nonEmptySources[0].id;
       console.log(chosenSourceId);
       var chosenSource = Game.getObjectById(chosenSourceId);
       var status = creep.harvest(chosenSource);
       if (status == ERR_NOT_IN_RANGE) {
-        creep.moveTo(chosenSource, {visualizePathStyle: {stroke: '#ffaa00'}});
+        creep.moveTo(chosenSource, {visualizePathStyle: {
+          stroke: '#ffaa00',
+          lineStyle: 'solid',
+          strokeWidth: 1,
+          opacity: 1
+        }});
       }
       return 0;
     } else {
@@ -141,7 +145,7 @@ var roleHarvester = {
   },
 
   deliver: function(creep) {
-    if(_.sum(creep.carry) > creep.carry.energy){
+    if(_.sum(creep.carry) > creep.carry.energy) {
       if (this.deliverCargo(creep) == OK) {
         return 0;
       } else {
