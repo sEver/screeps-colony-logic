@@ -3,6 +3,7 @@ var structureTower = require('structure.tower');
 var creepCommander = require('creep.commander');
 var aishaPerception = require('aisha.perception');
 var aishaAppearance = require('aisha.appearance');
+var aishaConstruction = require('aisha.construction');
 var utilitiesCreeps = require('utilities.creeps');
 
 module.exports.loop = function () {
@@ -25,6 +26,7 @@ module.exports.loop = function () {
     aishaPerception.scanRoom(room);
     structureTower.run(room);
     aishaAppearance.displayRoomDiagnostics(room);
+    aishaConstruction.run(room);
   });
 
   Object.values(Game.creeps).forEach((creep)=>{
