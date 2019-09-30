@@ -1,8 +1,11 @@
 module.exports = {
   run: function(room) {
     //console.log("Running construction");
-    if(Game.time % 60 == 0 && room.memory.traffic !== undefined && !room.memory.buildingInProgress) {
+    if(Game.time % 60 == 0 && room.memory.traffic !== undefined && room.find(FIND_CONSTRUCTION_SITES).length == 0) {
       this.constructARoadInTheBusiestPlace(room);
+    }
+    if(Game.time % 1 == 0 && room.controller.level > 1) {
+      // we can build 5 extensions
     }
   },
   constructARoadInTheBusiestPlace: function(room) {
