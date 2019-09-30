@@ -46,7 +46,7 @@ module.exports = {
       }
     }
   },
-  build: {
+  builder: {
     determineMission: function(creep) {
       if (!creep.memory.mission) {
         creep.memory.mission = "build";
