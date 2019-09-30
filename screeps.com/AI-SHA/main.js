@@ -17,12 +17,12 @@ module.exports.loop = function () {
 
   for(let spawnName in Game.spawns) {
     var spawn = Game.spawns[spawnName];
-    console.log(`Running spawn: "${spawn.name}" in room: "${spawn.room.name}"`)
+    //console.log(`Running spawn: "${spawn.name}" in room: "${spawn.room.name}"`)
     structureSpawn.run(spawn);
   }
 
   Object.values(Game.rooms).forEach((room)=>{
-    console.log(`Running room: ${room.name}`);
+    //console.log(`Running room: ${room.name}`);
     aishaPerception.scanRoom(room);
     structureTower.run(room);
     aishaAppearance.displayRoomDiagnostics(room);
@@ -30,7 +30,7 @@ module.exports.loop = function () {
   });
 
   Object.values(Game.creeps).forEach((creep)=>{
-    console.log(`Directing creep: ${creep.name}`);
+    //console.log(`Directing creep: ${creep.name}`);
     creepCommander.run(creep);
   });
 

@@ -29,7 +29,7 @@ module.exports = {
     for (let role in aishaConfig.targetNumberOfRoles) {
       let targetNumberForGivenRole = aishaConfig.targetNumberOfRoles[role];
       let currentNumberForGivenRole = utilitiesCreeps.countCreepsWithRole(role);
-      console.log(`${role}: ${currentNumberForGivenRole} / ${targetNumberForGivenRole}`);
+      //console.log(`${role}: ${currentNumberForGivenRole} / ${targetNumberForGivenRole}`);
       if (currentNumberForGivenRole < targetNumberForGivenRole) {
         this.spawnWithRole(spawn, role);
         break;

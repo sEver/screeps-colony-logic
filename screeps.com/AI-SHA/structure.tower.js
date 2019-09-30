@@ -11,7 +11,7 @@ module.exports = {
       this.maintainRoom(room);
       this.drawRangeCircles(room);
     } else {
-      console.log(`No towers in room: ${room.name}`)
+      //console.log(`No towers in room: ${room.name}`)
     }
   },
 

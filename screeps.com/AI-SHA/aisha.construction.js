@@ -1,6 +1,6 @@
 module.exports = {
   run: function(room) {
-    console.log("Running construction");
+    //console.log("Running construction");
     if(Game.time % 60 == 0 && room.memory.traffic !== undefined && !room.memory.buildingInProgress) {
       this.constructARoadInTheBusiestPlace(room);
     }
