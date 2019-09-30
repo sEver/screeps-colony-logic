@@ -8,22 +8,39 @@ module.exports = {
   },
 
   determineMission: function(creep) {
-    if (!creep.memory.mission || creep.memory.mission != 'harvest' && creep.carry.energy == 0) {
+    if (_.sum(creep.carry) == 0) {
       creep.memory.mission = 'harvest';
     }
-    if (creep.memory.mission != 'store' && creep.carry.energy == creep.carryCapacity) {
+    if (
+      _.sum(creep.carry) == creep.carryCapacity &&
+      creep.memory.mission != 'build' &&
+      creep.memory.mission != 'upgrade'
+    ) {
       creep.memory.mission = 'store';
     }
-    creep.say(creep.memory.mission);
   },
 
   executeChosenMission: function(creep) {
-    if (creep.memory.mission == 'store') {
-      creep.say('DS');
-      creepActions.store(creep);// if there is nowhere to deliver the energy, this just stops
-    } else {
-      creep.say('DH');
-      creepActions.harvest(creep);
+    switch (creep.memory.mission) {
+      case 'store':
+        if (creepActions.store(creep) != OK) {
+          creep.memory.mission = 'build';
+        }
+        break;
+      case 'build':
+        if (creepActions.build(creep) != OK) {
+          creep.memory.mission = 'upgrade';
+        }
+        break;
+      case 'upgrade':
+        creepActions.upgrade(creep);
+        break;
+      case 'harvest':
+        if (creepActions.harvest(creep) != OK) {
+          creep.memory.mission = 'deliver';
+        };
+        break;
+      default:
     }
   }
 }

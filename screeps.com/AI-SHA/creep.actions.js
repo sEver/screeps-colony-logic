@@ -39,4 +39,27 @@ module.exports = {
     }
   },
 
+  upgrade: function(creep) {
+    if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+      creep.moveTo(creep.room.controller, {visualizePathStyle: aishaAppearance.styles.paths.upgrade});
+    } else if (creep.upgradeController(creep.room.controller) == OK) {
+      return 0;
+    } else {
+      return -1;
+    }
+  },
+
+  build: function(creep) {
+    var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+    if (targets.length) {
+      var closestSite = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+      if (creep.build(closestSite) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(closestSite, {visualizePathStyle: aishaAppearance.styles.paths.build});
+      }
+      return 0;
+    } else {// no build sites found
+      return -1;
+    }
+  }
+
 }
