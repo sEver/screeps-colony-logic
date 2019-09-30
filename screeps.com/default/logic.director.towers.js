@@ -1,6 +1,6 @@
 module.exports = {
   run: function() {
-    var roomName = Game.spawns['Spawn1'].room.name;
+    var roomName = Game.spawns['AI-SHA'].room.name;
     this.towers = Game.rooms[roomName].find(
       FIND_MY_STRUCTURES,
       {filter: { structureType: STRUCTURE_TOWER }}

@@ -17,6 +17,6 @@ module.exports.loop = function () {
 
   if (Game.time % 50 == 0) {
     utilities.clearMemoryOfDeadCreeps();
-    //utilities.pruneListOfEmptyTombStones();
+    //utilities.pruneListOfEmptyTombStones(); 
   }
 }
