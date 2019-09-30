@@ -1,24 +1,19 @@
 var aishaAppearance = require('aisha.appearance');
 
 module.exports = {
-  moveTo: function(creep, ...args) {
-
-  },
-
   harvest: function(creep) {
     var sources = creep.room.find(FIND_SOURCES);
     var closestSource = creep.pos.findClosestByPath(sources, {filter: source => source.energy > 0});
     var status = creep.harvest(closestSource);
     if (status == ERR_NOT_IN_RANGE) {
       creep.moveTo(closestSource, {visualizePathStyle: aishaAppearance.styles.paths.harvest});
-      return OK;
-    } else {
-      return status;
+      status = OK;
     }
+    return status;
   },
 
   store: function(creep) {
-    var chargableStructures = creep.room.find(FIND_STRUCTURES, {
+    let chargableStructures = creep.room.find(FIND_STRUCTURES, {
       filter: (structure) => {
         return (
           structure.structureType == STRUCTURE_EXTENSION ||
@@ -28,37 +23,37 @@ module.exports = {
       }
     });
     if (chargableStructures.length > 0) {
-      var targetStructure = chargableStructures[0];
-      targetStructure = creep.pos.findClosestByPath(chargableStructures);
-      if (creep.transfer(targetStructure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+      let targetStructure = creep.pos.findClosestByPath(chargableStructures);
+      let status = creep.transfer(targetStructure, RESOURCE_ENERGY);
+      if (status == ERR_NOT_IN_RANGE) {
         creep.moveTo(targetStructure, {visualizePathStyle: aishaAppearance.styles.paths.store});
+        status = OK;
       }
-      return OK;
-    } else {// no chargable structures found
-      return ERR_NOT_FOUND;
+      return status;
     }
   },
 
   upgrade: function(creep) {
-    if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+    let status = creep.upgradeController(creep.room.controller)
+    if (status == ERR_NOT_IN_RANGE) {
       creep.moveTo(creep.room.controller, {visualizePathStyle: aishaAppearance.styles.paths.upgrade});
-    } else if (creep.upgradeController(creep.room.controller) == OK) {
-      return 0;
-    } else {
-      return -1;
+      status = OK;
     }
+    return status;
   },
 
   build: function(creep) {
-    var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+    let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
     if (targets.length) {
-      var closestSite = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
-      if (creep.build(closestSite) == ERR_NOT_IN_RANGE) {
+      let closestSite = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+      let status = creep.build(closestSite);
+      if (status == ERR_NOT_IN_RANGE) {
         creep.moveTo(closestSite, {visualizePathStyle: aishaAppearance.styles.paths.build});
+        status = OK;
       }
-      return 0;
+      return status;
     } else {// no build sites found
-      return -1;
+      return ERR_NOT_FOUND;
     }
   }
 
