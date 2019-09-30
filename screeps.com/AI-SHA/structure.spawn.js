@@ -1,8 +1,9 @@
-var utilitiesCreeps = require('utilities.creeps');
 var aishaConfig = require('aisha.config');
 var aishaAppearance = require('aisha.appearance');
+var utilitiesCreeps = require('utilities.creeps');
 
 module.exports = {
+  /* This is an object, should we really pass "spawn" to all the methods? */
   run: function(spawn) {
       if (spawn.spawning) {
         this.displaySpawnStatus(spawn);
@@ -26,9 +27,10 @@ module.exports = {
 
   maintainTargetPopulation: function(spawn) {
     for (let role in aishaConfig.targetNumberOfRoles) {
-      var targetNumberForGivenRole = aishaConfig.targetNumberOfRoles[role];
-      console.log(`${role}: ${utilitiesCreeps.countCreepsWithRole(role)} / ${targetNumberForGivenRole}`);
-      if (utilitiesCreeps.countCreepsWithRole(role) < targetNumberForGivenRole) {
+      let targetNumberForGivenRole = aishaConfig.targetNumberOfRoles[role];
+      let currentNumberForGivenRole = utilitiesCreeps.countCreepsWithRole(role);
+      console.log(`${role}: ${currentNumberForGivenRole} / ${targetNumberForGivenRole}`);
+      if (currentNumberForGivenRole < targetNumberForGivenRole) {
         this.spawnWithRole(spawn, role);
         break;
       }
