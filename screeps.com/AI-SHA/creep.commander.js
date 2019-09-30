@@ -53,21 +53,19 @@ module.exports = {
       }
       if (creep.memory.mission != "harvest" && creep.carry.energy == 0) {
         creep.memory.mission = "harvest"
-        creep.say('harvest');
+        creep.say(creep.memory.mission);
       }
       if (creep.memory.mission != "build" && creep.carry.energy == creep.carryCapacity) {
         creep.memory.mission = "build"
-        creep.say('build');
+        creep.say(creep.memory.mission);
       }
     },
     executeChosenMission: function(creep) {
       if (creep.memory.mission == "build") {
-        creep.say('BB');
         if(creepActions.build(creep)!=OK){
           creepActions.upgrade(creep);
         };
       } else {
-        creep.say('BH');
         creepActions.harvest(creep);
       }
     },
@@ -80,20 +78,18 @@ module.exports = {
       // if upgrading and empty - switch to harvesting
       if (creep.memory.mission != "harvest" && creep.carry.energy == 0) {
         creep.memory.mission = "harvest";
-        creep.say('harvest');
+        creep.say(creep.memory.mission);
       }
       // if not upgrading and full - switch to upgrading
       if (creep.memory.mission != "upgrade" && creep.carry.energy == creep.carryCapacity) {
         creep.memory.mission = "upgrade";
-        creep.say('upgrade');
+        creep.say(creep.memory.mission);
       }
     },
     executeChosenMission: function(creep) {
       if (creep.memory.mission == "upgrade") {
-        creep.say('UU');
         creepActions.upgrade(creep);// you can always deliver energy to controller, so this never stops
       } else {
-        creep.say('UH');
         creepActions.harvest(creep);
       }
     },
