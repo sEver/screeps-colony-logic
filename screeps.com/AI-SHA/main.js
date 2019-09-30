@@ -1,5 +1,9 @@
 var structureSpawn = require('structure.spawn');
 var structureTower = require('structure.tower');
+var creepCommander = require('creep.commander');
+var aishaPerception = require('aisha.perception');
+var aishaAppearance = require('aisha.appearance');
+var utilitiesCreeps = require('utilities.creeps');
 
 module.exports.loop = function () {
   // I am AI-SHA. Witness my emergence.
@@ -18,7 +22,18 @@ module.exports.loop = function () {
 
   Object.values(Game.rooms).forEach((room)=>{
     console.log(`Running room: ${room.name}`);
+    aishaPerception.scanRoom(room);
     structureTower.run(room);
+    aishaAppearance.displayRoomDiagnostics(room);
   });
+
+  Object.values(Game.creeps).forEach((creep)=>{
+    console.log(`Directing creep: ${creep.name}`);
+    creepCommander.run(creep);
+  });
+
+  if(Game.time % 60 === 0) {
+    utilitiesCreeps.clearMemoryOfDeadCreeps();
+  }
 
 }
