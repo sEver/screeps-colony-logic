@@ -4,6 +4,14 @@ module.exports = {
       name: "drone",
       body: [WORK,CARRY,MOVE],
     },
+    drone400: {
+      name: "double_drone",
+      body: [
+        WORK,WORK,
+        CARRY,CARRY,
+        MOVE,MOVE
+      ],
+    },
   },
   creepRoles: {
     harvester: {
@@ -17,7 +25,7 @@ module.exports = {
     }
   },
   targetNumberOfRoles: {
-    drone: 5,
+    drone: 7,
     upgrader: 1,
     builder: 2,
   },
