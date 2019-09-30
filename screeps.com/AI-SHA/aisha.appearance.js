@@ -14,10 +14,28 @@ module.exports = {
     },
     paths: {
       harvest: {
+        opacity: 1,
+        strokeWidth: .04,
+        lineStyle: 'solid',
         stroke: colors.energy,
       },
       store: {
+        opacity: 1,
+        strokeWidth: .04,
+        lineStyle: 'solid',
         stroke: colors.lightGray,
+      },
+      upgrade: {
+        opacity: 1,
+        strokeWidth: .04,
+        lineStyle: 'dashed',
+        stroke: colors.white,
+      },
+      build: {
+        opacity: 1,
+        strokeWidth: .04,
+        lineStyle: 'dotted',
+        stroke: colors.white,
       },
     },
   },
