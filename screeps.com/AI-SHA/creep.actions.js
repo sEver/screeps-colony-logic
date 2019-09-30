@@ -1,12 +1,23 @@
 var aishaAppearance = require('aisha.appearance');
 
 module.exports = {
+  move: function(creep, ...args) {
+    if(creep.room.memory.traffic === undefined) creep.room.memory.traffic = {};
+    let x_y = `${creep.pos.x}_${creep.pos.y}`
+    if(creep.room.memory.traffic[x_y] === undefined) {
+      creep.room.memory.traffic[x_y] = 1
+    } else {
+      creep.room.memory.traffic[x_y] += 1
+    }
+    creep.moveTo(...args);
+  },
+
   harvest: function(creep) {
     var sources = creep.room.find(FIND_SOURCES);
     var closestSource = creep.pos.findClosestByPath(sources, {filter: source => source.energy > 0});
     var status = creep.harvest(closestSource);
     if (status == ERR_NOT_IN_RANGE) {
-      creep.moveTo(closestSource, {visualizePathStyle: aishaAppearance.styles.paths.harvest});
+      this.move(creep, closestSource, {visualizePathStyle: aishaAppearance.styles.paths.harvest});
       status = OK;
     }
     return status;
@@ -26,7 +37,7 @@ module.exports = {
       let targetStructure = creep.pos.findClosestByPath(chargableStructures);
       let status = creep.transfer(targetStructure, RESOURCE_ENERGY);
       if (status == ERR_NOT_IN_RANGE) {
-        creep.moveTo(targetStructure, {visualizePathStyle: aishaAppearance.styles.paths.store});
+        this.move(creep, targetStructure, {visualizePathStyle: aishaAppearance.styles.paths.store});
         status = OK;
       }
       return status;
@@ -36,7 +47,7 @@ module.exports = {
   upgrade: function(creep) {
     let status = creep.upgradeController(creep.room.controller)
     if (status == ERR_NOT_IN_RANGE) {
-      creep.moveTo(creep.room.controller, {visualizePathStyle: aishaAppearance.styles.paths.upgrade});
+      this.move(creep, creep.room.controller, {visualizePathStyle: aishaAppearance.styles.paths.upgrade});
       status = OK;
     }
     return status;
