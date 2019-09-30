@@ -2,6 +2,7 @@ var colors = {
   stealthJetGray: 'rgba(10,10,10,0.8)',
   lightGray: '#ccc',
   white: '#fff',
+  green: '#0f0',
   energy: '#f4e068',
 };
 module.exports = {
@@ -35,7 +36,7 @@ module.exports = {
         opacity: 1,
         strokeWidth: .04,
         lineStyle: 'dotted',
-        stroke: colors.white,
+        stroke: colors.green,
       },
     },
   },
