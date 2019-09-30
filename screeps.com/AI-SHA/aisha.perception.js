@@ -23,7 +23,7 @@ module.exports = {
       if(source.ticksToRegeneration) {
         room.visual.text(
           `${source.ticksToRegeneration}`,
-          source.pos.x, source.pos.y+1, { color: '#666' }
+          source.pos.x, source.pos.y+1, { color: '#aaa', backgroundColor: '#222', opacity: 0.6 } //// FIXME: Move this to styles
         );
       }
     });
