@@ -1,3 +1,5 @@
+var aishaAppearance = require('aisha.appearance');
+
 module.exports = {
   moveTo: function(creep, ...args) {
 
@@ -8,7 +10,7 @@ module.exports = {
     var closestSource = creep.pos.findClosestByPath(sources, {filter: source => source.energy > 0});
     var status = creep.harvest(closestSource);
     if (status == ERR_NOT_IN_RANGE) {
-      creep.moveTo(closestSource, {visualizePathStyle: {stroke: '#ffaa00'}});
+      creep.moveTo(closestSource, {visualizePathStyle: aishaAppearance.styles.paths.harvest});
       return OK;
     } else {
       return status;
@@ -29,7 +31,7 @@ module.exports = {
       var targetStructure = chargableStructures[0];
       targetStructure = creep.pos.findClosestByPath(chargableStructures);
       if (creep.transfer(targetStructure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(targetStructure, {visualizePathStyle: {stroke: '#ffffff'}});
+        creep.moveTo(targetStructure, {visualizePathStyle: aishaAppearance.styles.paths.store});
       }
       return OK;
     } else {// no chargable structures found

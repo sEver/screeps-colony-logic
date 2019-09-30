@@ -10,8 +10,16 @@ module.exports = {
     spawnStatus: {
       align: 'left',
       opacity: 1,
-      backgroundColor: colors.stealthJetGray
-    }
+      backgroundColor: colors.stealthJetGray,
+    },
+    paths: {
+      harvest: {
+        stroke: colors.energy,
+      },
+      store: {
+        stroke: colors.lightGray,
+      },
+    },
   },
   displayRoomDiagnostics: function(room) {
     let anchor = {x: 10, y: 18};
