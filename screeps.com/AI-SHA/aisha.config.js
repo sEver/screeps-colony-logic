@@ -12,6 +12,14 @@ module.exports = {
         MOVE,MOVE
       ],
     },
+    drone800: {
+      name: "quad_drone",
+      body: [
+        WORK,WORK,WORK,WORK,
+        CARRY,CARRY,CARRY,CARRY,
+        MOVE,MOVE,MOVE,MOVE
+      ], // cost: 800
+    },
   },
   creepRoles: {
     harvester: {
