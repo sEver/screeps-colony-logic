@@ -1,15 +1,25 @@
 var aishaAppearance = require('aisha.appearance');
+var aishaPerception = require('aisha.perception');
 
 module.exports = {
   move: function(creep, ...args) {
-    if(creep.room.memory.traffic === undefined) creep.room.memory.traffic = {};
-    let x_y = `${creep.pos.x}_${creep.pos.y}`
-    if(creep.room.memory.traffic[x_y] === undefined) {
-      creep.room.memory.traffic[x_y] = 1
-    } else {
-      creep.room.memory.traffic[x_y] += 1
+    if(!aishaPerception.isStructurePresentAtPosition(
+      creep.room, creep.pos.x, creep.pos.y, STRUCTURE_ROAD)
+    ) {
+      this.registerTrafficData(creep);
     }
+
     creep.moveTo(...args);
+  },
+
+  registerTrafficData: function(creep) {
+    if(creep.room.memory.traffic === undefined) creep.room.memory.traffic = {};
+    let x_y = `${creep.pos.x}_${creep.pos.y}`;
+    if(creep.room.memory.traffic[x_y] === undefined) {
+      creep.room.memory.traffic[x_y] = 1;
+    } else {
+      creep.room.memory.traffic[x_y] += 1;
+    }
   },
 
   harvest: function(creep) {
