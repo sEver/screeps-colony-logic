@@ -6,7 +6,14 @@ module.exports = {
     if(role !== undefined && this[role] !== undefined) {
       this[role].determineMission(creep);
       this[role].executeChosenMission(creep);
+      //this.drawCreepStatus(creep);
     }
+  },
+  drawCreepStatus: function(creep) {
+    creep.room.visual.text(
+      `${creep.ticksToLive}`,
+      creep.pos.x, creep.pos.y, { align: 'center', color: '#CCC', backgroundColor: "rgba(20,20,20,0.7)" }
+    );
   },
   drone: {
     determineMission: function(creep) {
