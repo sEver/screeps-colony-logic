@@ -22,7 +22,6 @@ module.exports.loop = function () {
   }
 
   Object.values(Game.rooms).forEach((room)=>{
-    //console.log(`Running room: ${room.name}`);
     aishaPerception.scanRoom(room);
     structureTower.run(room);
     aishaAppearance.displayRoomDiagnostics(room);
@@ -30,7 +29,6 @@ module.exports.loop = function () {
   });
 
   Object.values(Game.creeps).forEach((creep)=>{
-    //console.log(`Directing creep: ${creep.name}`);
     creepCommander.run(creep);
   });
 
