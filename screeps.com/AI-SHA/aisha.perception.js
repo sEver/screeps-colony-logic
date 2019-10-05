@@ -29,5 +29,11 @@ module.exports = {
     });
 
     room.memory.energyInAllSources = sources.reduce((acc, cur) => acc + cur.energy, 0);
-  }
+  },
+  isStructurePresentAtPosition: function(room, x, y, structureType) {
+    let structuresPresent = room.lookForAt(LOOK_STRUCTURES, x, y);
+    let structuresOfGivenTypePresent =
+      structuresPresent.filter(structure => structure.structureType == structureType);
+    return structuresOfGivenTypePresent.length > 0;
+  },
 }
