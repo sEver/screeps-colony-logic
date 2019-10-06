@@ -49,7 +49,7 @@ module.exports = {
       console.log(`Heaviest offroad traffic is ${mostVisitedTileTraffic}, aborting.`);
       return;
     } else {
-      let coords = this.coordsOfTrafficTile(mostVisitedTile);
+      var coords = this.coordsOfTrafficTile(mostVisitedTile);
       var status = room.createConstructionSite(coords[0], coords[1], STRUCTURE_ROAD);
     }
 
