@@ -37,5 +37,5 @@ module.exports = {
     upgrader: 1,
     builder: 2,
   },
-  minimumStructureHp: 2000,
+  minimumStructureHp: 3000,
 }
