@@ -1,6 +1,6 @@
 module.exports = {
   creepTypes: {
-    drone: {
+    drone200: {
       name: "drone",
       body: [WORK,CARRY,MOVE],
     },
@@ -29,13 +29,14 @@ module.exports = {
       actions: ["harvest", "upgrade"],
     },
     builder: {
-      actions: ["retrieve", "build"],
+      actions: ["harvest", "build", "upgrade"],
     }
   },
   targetNumberOfRoles: {
     drone: 7,
     upgrader: 1,
     builder: 2,
+    repairer: 1,
   },
   minimumStructureHp: 3000,
 }

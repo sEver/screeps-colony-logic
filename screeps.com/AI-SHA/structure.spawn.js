@@ -42,7 +42,7 @@ module.exports = {
     if (Memory.creepSerialNumber === undefined) Memory.creepSerialNumber = 0;
 
     let newName = `${role}_${Memory.creepSerialNumber}`;
-    let chosenBodyType = aishaConfig.creepTypes.drone.body;
+    let chosenBodyType = aishaConfig.creepTypes.drone200.body;
     if(spawn.room.energyAvailable > 400) {
       chosenBodyType = aishaConfig.creepTypes.drone400.body;
       newName = `${aishaConfig.creepTypes.drone400.name}_${Memory.creepSerialNumber}`;
