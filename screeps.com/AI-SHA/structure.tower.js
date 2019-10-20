@@ -1,4 +1,5 @@
 var aishaConfig = require('aisha.config');
+var aishaPerception = require('aisha.perception');
 
 module.exports = {
   run: function(room) {
@@ -16,25 +17,7 @@ module.exports = {
   },
 
   maintainRoom: function(room) {
-    var damagedBuildings = room.find(FIND_STRUCTURES, {
-      filter: structure => {
-        var isItAStructureForRepair =
-        (
-          structure.structureType == STRUCTURE_ROAD ||
-          structure.structureType == STRUCTURE_RAMPART ||
-          structure.structureType == STRUCTURE_WALL
-        ) &&
-        structure.hits < structure.hitsMax * 0.9 &&
-        structure.hits < aishaConfig.minimumStructureHp;
-
-        var isItAContainerForRepair = (
-          structure.structureType == STRUCTURE_CONTAINER &&
-          structure.hits < structure.hitsMax
-        )
-
-        return isItAStructureForRepair || isItAContainerForRepair;
-      }
-    });
+    var damagedBuildings = aishaPerception.damagedBuildings(room);
 
     if(damagedBuildings.length) {
       damagedBuildings.sort((a,b) => a.hits - b.hits);

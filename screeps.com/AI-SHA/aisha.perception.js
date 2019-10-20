@@ -1,4 +1,5 @@
 var aishaAppearance = require('aisha.appearance');
+var aishaConfig = require('aisha.config');
 
 module.exports = {
   scanRoom: function(room) {
@@ -36,4 +37,25 @@ module.exports = {
       structuresPresent.filter(structure => structure.structureType == structureType);
     return structuresOfGivenTypePresent.length > 0;
   },
+  damagedBuildings: function(room) {
+    var damagedBuildings = room.find(FIND_STRUCTURES, {
+      filter: structure => {
+        var isItAStructureForRepair =
+        (
+          structure.structureType == STRUCTURE_ROAD ||
+          structure.structureType == STRUCTURE_RAMPART ||
+          structure.structureType == STRUCTURE_WALL
+        ) &&
+        structure.hits < structure.hitsMax * 0.9 &&
+        structure.hits < aishaConfig.minimumStructureHp;
+
+        var isItAContainerForRepair = (
+          structure.structureType == STRUCTURE_CONTAINER &&
+          structure.hits < structure.hitsMax
+        )
+        return isItAStructureForRepair || isItAContainerForRepair;
+      }
+    });
+    return damagedBuildings;
+  }
 }
