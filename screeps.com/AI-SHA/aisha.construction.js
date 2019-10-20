@@ -10,6 +10,7 @@ module.exports = {
       // we can build 5 extensions
     }
     if(Game.time % 3600 == 0) {
+      console.log("Resetting traffic memory.");
       room.memory.traffic = {};
     }
   },
