@@ -101,4 +101,28 @@ module.exports = {
       }
     },
   },
+  repairer: {
+    determineMission: function(creep) {
+      if (!creep.memory.mission) {
+        creep.memory.mission = "harvest";
+      }
+      if (creep.memory.mission != "repair" && creep.carry.energy == creep.carryCapacity) {
+        creep.memory.mission = "repair";
+        creep.say(creep.memory.mission);
+      }
+      // if upgrading and empty - switch to harvesting
+      if (creep.memory.mission != "harvest" && creep.carry.energy == 0) {
+        creep.memory.mission = "harvest";
+        creep.say(creep.memory.mission);
+      }
+    },
+    executeChosenMission: function(creep) {
+      if (creep.memory.mission == "repair") {
+        creepActions.repair(creep);
+      } else {
+        creepActions.harvest(creep);
+        creep.say("H");
+      }
+    },
+  },
 }

@@ -17,11 +17,11 @@ module.exports = {
   },
 
   maintainRoom: function(room) {
-    var damagedBuildings = aishaPerception.damagedBuildings(room);
+    var structuresCritical = aishaPerception.structuresRequiringUrgentRepair(room);
 
-    if(damagedBuildings.length) {
-      damagedBuildings.sort((a,b) => a.hits - b.hits);
-      this.towers.forEach(tower => tower.repair(damagedBuildings[0]));
+    if(structuresCritical.length) {
+      structuresCritical.sort((a,b) => a.hits - b.hits);
+      this.towers.forEach(tower => tower.repair(structuresCritical[0]));
     }
   },
 

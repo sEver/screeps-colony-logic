@@ -65,6 +65,7 @@ module.exports = {
   },
 
   build: function(creep) {
+    // FIXME: SO WASTEFULL TO CALL THAT TWICE!
     let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
     if (targets.length) {
       let closestSite = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
@@ -75,6 +76,28 @@ module.exports = {
       }
       return status;
     } else {// no build sites found
+      return ERR_NOT_FOUND;
+    }
+  },
+
+  repair: function(creep) {
+    if(creep.memory.targetId === undefined) {
+      let structuresToRepair = aishaPerception.structuresRequiringRepair(creep.room);
+      creep.memory.targetId = creep.pos.findClosestByRange(structuresToRepair).id;
+    }
+    let target = Game.getObjectById(creep.memory.targetId);
+
+    if(target) {
+      if(target.hits === target.hitsMax) {
+        delete creep.memory.targetId;
+      }
+      let status = creep.repair(target)
+      if(status == ERR_NOT_IN_RANGE) {
+        creep.moveTo(target, {visualizePathStyle: aishaAppearance.styles.paths.repair})
+        status = OK;
+      }
+      return status;
+    } else {
       return ERR_NOT_FOUND;
     }
   }

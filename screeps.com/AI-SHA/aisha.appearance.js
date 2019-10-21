@@ -4,6 +4,7 @@ var colors = {
   white: '#fff',
   green: '#0f0',
   energy: '#f4e068',
+  blue: '#00A',
 };
 module.exports = {
   colors: colors,
@@ -37,6 +38,12 @@ module.exports = {
         strokeWidth: .04,
         lineStyle: 'dotted',
         stroke: colors.green,
+      },
+      repair: {
+        opacity: 1,
+        strokeWidth: .04,
+        lineStyle: 'dotted',
+        stroke: colors.blue,
       },
     },
   },
