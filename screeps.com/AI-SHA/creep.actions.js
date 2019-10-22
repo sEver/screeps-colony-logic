@@ -1,6 +1,6 @@
 var aishaAppearance = require('aisha.appearance');
 var aishaPerception = require('aisha.perception');
-
+var aishaConfig = require('aisha.config');
 module.exports = {
   move: function(creep, ...args) {
     if(!aishaPerception.isStructurePresentAtPosition(
@@ -88,7 +88,7 @@ module.exports = {
     let target = Game.getObjectById(creep.memory.targetId);
 
     if(target) {
-      if(target.hits === target.hitsMax) {
+      if(target.hits === target.hitsMax || target.hits > aishaConfig.comfortableStructureHp) {
         delete creep.memory.targetId;
       }
       let status = creep.repair(target)
