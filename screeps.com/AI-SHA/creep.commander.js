@@ -119,6 +119,7 @@ module.exports = {
     executeChosenMission: function(creep) {
       if (creep.memory.mission == "repair") {
         creepActions.repair(creep);
+        creep.say("R");
       } else {
         creepActions.harvest(creep);
         creep.say("H");
