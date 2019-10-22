@@ -9,7 +9,7 @@ module.exports = {
     if(Game.time % 100 == 0 && room.controller.level > 1) {
       // we can build 5 extensions
     }
-    if(Game.time % 3600 == 0) {
+    if(Game.time % 7200 == 0) {
       console.log("Resetting traffic memory.");
       room.memory.traffic = {};
     }
