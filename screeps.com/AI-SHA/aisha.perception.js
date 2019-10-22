@@ -75,7 +75,7 @@ module.exports = {
     var structuresForRepair = room.find(FIND_STRUCTURES, {
       filter: structure => {
         const isItAStructureAtSuboptimalIntegrity = (
-          structure.hits < structure.hitsMax * 1 &&
+          structure.hits < structure.hitsMax * 0.8 &&
           structure.hits < aishaConfig.comfortableStructureHp
         );
 
