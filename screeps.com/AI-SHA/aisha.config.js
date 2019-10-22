@@ -35,7 +35,7 @@ module.exports = {
   targetNumberOfRoles: {
     drone: 7,
     upgrader: 1,
-    builder: 2,
+    builder: 0,
     repairer: 1,
   },
   minimumStructureHp: 3000,
