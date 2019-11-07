@@ -1,3 +1,5 @@
+**The auto-syncing of this repo was deemed to be a bad idea after all, see conclusions at the bottom of the file.**
+
 ##### The flow of changes between this repo and the Screeps Server (when enabled to be synced) follows the rules below:
 
 0. Screeps Server is configured to use this repo and `screeps.com/default` directory.
