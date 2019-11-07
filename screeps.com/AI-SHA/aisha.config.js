@@ -39,5 +39,5 @@ module.exports = {
     repairer: 1,
   },
   minimumStructureHp: 3000,
-  comfortableStructureHp: 40000,
+  comfortableStructureHp: 100000,
 }
