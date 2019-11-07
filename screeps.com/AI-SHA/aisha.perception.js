@@ -7,10 +7,10 @@ module.exports = {
     if(!room.memory.sources) room.memory.sources = {};
     var sources = room.find(FIND_SOURCES);
     sources.forEach((source) => {
-      if (true || !(source.id in room.memory.sources)) {
-        //console.log(`ADDING ${source.id}`)
+      if (!(source.id in room.memory.sources)) {
+        console.log(`ADDING ${source.id}`)
         room.memory.sources[source.id] = {pos: JSON.parse(JSON.stringify(source.pos))};
-        //console.log(Object.entries(room.memory.sources[source.id]))
+        console.log(Object.entries(room.memory.sources[source.id]))
       }
       // source.pos,
       // energy,
