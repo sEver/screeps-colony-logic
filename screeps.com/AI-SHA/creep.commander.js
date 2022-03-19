@@ -108,6 +108,7 @@ module.exports = {
       }
       if (creep.memory.mission != "repair" && creep.carry.energy == creep.carryCapacity) {
         creep.memory.mission = "repair";
+        delete creep.memory.targetId;
         creep.say(creep.memory.mission);
       }
       // if upgrading and empty - switch to harvesting

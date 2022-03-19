@@ -58,7 +58,7 @@ module.exports = {
       anchor.x, anchor.y+1, { align: 'left', color: colors.lightGray }
     );
     room.visual.text(
-      `Energy in sources: ${room.memory.energyInAllSources}`,
+      `Energy in sources: ${room.memory.energyInAllSources}  (${(100 * room.memory.energyInAllSources / (2*3000)).toFixed(0) }%)`,
       anchor.x, anchor.y+2, { align: 'left', color: colors.energy }
     );
     room.visual.text(

@@ -31,6 +31,7 @@ module.exports = {
     });
 
     room.memory.energyInAllSources = sources.reduce((acc, cur) => acc + cur.energy, 0);
+    room.memory.structuresRequiringRepairIds = this.structuresRequiringRepair(room).map(struct => struct.id).slice(0,10);
   },
 
   isStructurePresentAtPosition: function(room, x, y, structureType) {
@@ -54,15 +55,15 @@ module.exports = {
           );
 
         const isItAStructureInNeedOfATopUp =
-          (
-            structure.structureType == STRUCTURE_CONTAINER ||
-            structure.structureType == STRUCTURE_STORAGE ||
-            structure.structureType == STRUCTURE_EXTENSION ||
-            structure.structureType == STRUCTURE_SPAWN ||
-            structure.structureType == STRUCTURE_TOWER
-          ) && (
-            structure.hits < structure.hitsMax
-          );
+          structure.hits < structure.hitsMax
+          &&
+          [
+            STRUCTURE_CONTAINER,
+            STRUCTURE_STORAGE,
+            STRUCTURE_EXTENSION,
+            STRUCTURE_SPAWN,
+            STRUCTURE_TOWER
+          ].includes(structure.structureType);
 
         return isItAStructureAtCriticalIntegrity || isItAStructureInNeedOfATopUp;
       }
@@ -82,6 +83,9 @@ module.exports = {
         return isItAStructureAtSuboptimalIntegrity;
       }
     });
+
+    structuresForRepair.sort((a, b) => a.hits/a.hitsMax - b.hits/b.hitsMax);
+
     return structuresForRepair;
   },
 

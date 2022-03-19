@@ -82,9 +82,10 @@ module.exports = {
 
   repair: function(creep) {
     if(creep.memory.targetId === undefined) {
-      let structuresToRepair = aishaPerception.structuresRequiringRepair(creep.room);
-      if(structuresToRepair.length) {
-        creep.memory.targetId = creep.pos.findClosestByRange(structuresToRepair).id;
+      let structuresToRepairIds = creep.room.memory.structuresRequiringRepairIds;
+      if(structuresToRepairIds.length) {
+        creep.memory.targetId = structuresToRepairIds.shift();
+        //creep.pos.findClosestByRange(structuresToRepair).id;
       } else {
         return ERR_NOT_FOUND;
       }

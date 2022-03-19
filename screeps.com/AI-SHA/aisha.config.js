@@ -18,7 +18,7 @@ module.exports = {
         WORK,WORK,WORK,WORK,
         CARRY,CARRY,CARRY,CARRY,
         MOVE,MOVE,MOVE,MOVE
-      ], // cost: 800
+      ],
     },
   },
   creepRoles: {
@@ -30,14 +30,17 @@ module.exports = {
     },
     builder: {
       actions: ["harvest", "build", "upgrade"],
-    }
+    },
+    repairer: {
+      actions: ["harvest", "repair", "upgrade"],
+    },
   },
   targetNumberOfRoles: {
-    drone: 7,
+    drone: 3,
     upgrader: 1,
-    builder: 0,
-    repairer: 1,
+    builder: 2,
+    repairer: 5,
   },
-  minimumStructureHp: 3000,
-  comfortableStructureHp: 100000,
+  minimumStructureHp: 10000,
+  comfortableStructureHp: 50 * 1000 * 1000,
 }
