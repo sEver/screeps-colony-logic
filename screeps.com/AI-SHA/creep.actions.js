@@ -12,6 +12,10 @@ module.exports = {
     creep.moveTo(...args);
   },
 
+  rtb: function(creep) {
+    return this.move(creep, Game.flags.Base.pos);
+  },
+
   registerTrafficData: function(creep) {
     if(creep.room.memory.traffic === undefined) creep.room.memory.traffic = {};
     let x_y = `${creep.pos.x}_${creep.pos.y}`;
@@ -105,6 +109,19 @@ module.exports = {
     } else {
       return ERR_NOT_FOUND;
     }
+  },
+  
+  sign: function(creep) {
+    if(creep.room.controller) {
+      let status = creep.signController(creep.room.controller, aishaConfig.roomSign)
+      if(status == ERR_NOT_IN_RANGE) {
+        creep.moveTo(creep.room.controller);
+        status = OK;
+      }
+      return status;
+    } else {
+      return ERR_NOT_FOUND;
+    }
   }
-
+  
 }
