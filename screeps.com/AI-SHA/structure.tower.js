@@ -27,6 +27,7 @@ module.exports = {
 
   defendRoom: function(room) {
     var hostiles = room.find(FIND_HOSTILE_CREEPS);
+    hostiles = hostiles.reverse();// attack healers in the back // TODO: refactor this into actual healer-targetting system
     if (hostiles.length) {
       var username = hostiles[0].owner.username;
 
