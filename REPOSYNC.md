@@ -39,4 +39,7 @@ and you publish that repo to GitHub, then you connect that repo in Account Manag
 
 2. Actually, when you push to any branch, server pulls the repo and uses files from master branch, which are then copied down to Local Client and will overwrite your changes if you're not on `master` branch in local repo.
 
+3. To manage the sync, screeps requires full read/write access to all repos, private and public, including all wikis, projects, etc. That seems excessive, seeing as the system only needs to pull public repo and that could be done with no access at all.
+
 3. Due to the above, it is now determined, that syncing the GitHub repo with Screeps Server might not be so useful for us after all, as it causes some problems, while only duplicating the syncing functionality that Local Client already posesses.
+
