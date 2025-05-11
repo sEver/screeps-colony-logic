@@ -51,7 +51,10 @@ module.exports = {
       chosenBodyType = aishaConfig.creepTypes.drone800.body;
       newName = `${aishaConfig.creepTypes.drone800.name}_${Memory.creepSerialNumber}`;
     }
-
+    if(spawn.room.energyAvailable > 1000) {
+      chosenBodyType = aishaConfig.creepTypes.droneWCM500.body;
+      newName = `${aishaConfig.creepTypes.droneWCM500.name}_WCM500_${Memory.creepSerialNumber}`;
+    }
     console.log('Attempting to spawn new actor: ' + newName);
     let result = spawn.spawnCreep(
       chosenBodyType,
