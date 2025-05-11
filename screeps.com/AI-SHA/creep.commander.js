@@ -15,8 +15,50 @@ module.exports = {
       creep.pos.x, creep.pos.y, { align: 'center', color: '#CCC', backgroundColor: "rgba(20,20,20,0.7)" }
     );
   },
+
+  // why is this duplicated here and in particular role?
+  executeMission: function(creep) {
+    switch (creep.memory.mission) {
+      case "sign":
+        if(creepActions.sign(creep) != OK){
+          creep.memory.mission = 'store';
+        };
+        screep.say("sign");
+        break;        
+      case 'store':
+        if (creepActions.store(creep) != OK) {
+          creep.memory.mission = 'build';
+        }
+        break;
+      case 'build':
+        if (creepActions.build(creep) != OK) {
+          creep.memory.mission = 'upgrade';
+        }
+        break;
+      case 'upgrade':
+        creepActions.upgrade(creep);
+        break;
+      case 'harvest':
+        if (creepActions.harvest(creep) != OK) {
+          creep.memory.mission = 'store';
+        };
+        break;
+      case "repair":
+        creepActions.repair(creep);
+        creep.say("R");
+        break;
+      default:
+    }
+  },
+
   drone: {
     determineMission: function(creep) {
+      if (creep.memory.mission == "sign") {
+        if(creep.room.controller.sign.username == "sEver") {
+          creep.memory.mission = 'harvest';
+        }
+        return;// do not interfere with the sign bearer
+      }        
       if (_.sum(creep.carry) == 0) {
         creep.memory.mission = 'harvest';
       }
@@ -31,6 +73,12 @@ module.exports = {
 
     executeChosenMission: function(creep) {
       switch (creep.memory.mission) {
+        case "sign":
+          if(creepActions.sign(creep) != OK){
+            creep.memory.mission = 'harvest';
+          };
+          creep.say("sign");
+          break;        
         case 'store':
           if (creepActions.store(creep) != OK) {
             creep.memory.mission = 'build';
@@ -119,8 +167,10 @@ module.exports = {
     },
     executeChosenMission: function(creep) {
       if (creep.memory.mission == "repair") {
-        creepActions.repair(creep);
-        creep.say("R");
+          creep.say("R");
+          if (creepActions.repair(creep) != OK) {
+            creep.memory.mission = 'upgrade';
+          }
       } else {
         creepActions.harvest(creep);
         creep.say("H");
