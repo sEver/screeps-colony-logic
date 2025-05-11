@@ -16,41 +16,6 @@ module.exports = {
     );
   },
 
-  // why is this duplicated here and in particular role?
-  executeMission: function(creep) {
-    switch (creep.memory.mission) {
-      case "sign":
-        if(creepActions.sign(creep) != OK){
-          creep.memory.mission = 'store';
-        };
-        screep.say("sign");
-        break;        
-      case 'store':
-        if (creepActions.store(creep) != OK) {
-          creep.memory.mission = 'build';
-        }
-        break;
-      case 'build':
-        if (creepActions.build(creep) != OK) {
-          creep.memory.mission = 'upgrade';
-        }
-        break;
-      case 'upgrade':
-        creepActions.upgrade(creep);
-        break;
-      case 'harvest':
-        if (creepActions.harvest(creep) != OK) {
-          creep.memory.mission = 'store';
-        };
-        break;
-      case "repair":
-        creepActions.repair(creep);
-        creep.say("R");
-        break;
-      default:
-    }
-  },
-
   drone: {
     determineMission: function(creep) {
       if (creep.memory.mission == "sign") {
