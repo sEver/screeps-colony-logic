@@ -48,7 +48,7 @@ module.exports = {
     },
   },
   displayRoomDiagnostics: function(room) {
-    let anchor = {x: 10, y: 18};
+    let anchor = {x: 0, y: 18};
     room.visual.text(
       `Energy available: ${room.energyAvailable} (${(100 * room.energyAvailable / room.energyCapacityAvailable).toFixed(0) }%)`,
       anchor.x, anchor.y, { align: 'left', color: '#00FF00' }
