@@ -20,6 +20,14 @@ module.exports = {
         MOVE,MOVE,MOVE,MOVE
       ],
     },
+    droneWCM500: {
+      name: "quad_drone",
+      body: [
+        WORK,WORK,WORK,WORK,WORK,
+        CARRY,CARRY,CARRY,CARRY,CARRY,
+        MOVE,MOVE,MOVE,MOVE,MOVE
+      ],
+    },
   },
   creepRoles: {
     harvester: {
@@ -36,11 +44,12 @@ module.exports = {
     },
   },
   targetNumberOfRoles: {
-    drone: 3,
-    upgrader: 1,
-    builder: 2,
-    repairer: 5,
+    drone: 8,
+    upgrader: 0,
+    builder: 0,
+    repairer: 1,
   },
   minimumStructureHp: 10000,
-  comfortableStructureHp: 50 * 1000 * 1000,
+  comfortableStructureHp: 1000 * 1000,
+  roomSign: "Through the destruction of our enemies, do we earn our salvation?",
 }
